@@ -8,17 +8,14 @@ public class DaoDemo {
 
 	public void doQuery(Transaction tr) throws Exception {
 		JdbcRunner jdbc = JdbcUtil.getJdbcRunnerFromTransaction(tr);
-		String sql = "select * from dual where 1=?";
+		String sql = "select s.name from student s where s.id = ?";
 		String s = jdbc.queryForString(sql, new Object[]{1});
 		System.out.println(s);
-		jdbc = JdbcUtil.getJdbcRunnerFromTransaction(tr);
-		Integer i = jdbc.queryForInteger(sql, new Object[]{1});
-		System.out.println(i);
 	}
 	
 	public void doDelete(Transaction tr) throws Exception {
 		JdbcRunner jdbc = JdbcUtil.getJdbcRunnerFromTransaction(tr);
-		String sql = "delete from dual where 1=?";
+		String sql = "delete from student s where s.id = ?";
 		int out = jdbc.update(sql, new Object[]{1});
 		System.out.println(out);
 	}
